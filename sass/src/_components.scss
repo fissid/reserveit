@@ -1,0 +1,236 @@
+@import "./variables";
+
+.menu {
+  @include respond(900px) {
+    display: flex;
+  }
+  &__item {
+    list-style: none;
+    padding: 1.5rem 3rem;
+    position: relative;
+    &:not(:first-child) {
+      margin: 1rem 0;
+      @include respond(900px) {
+        margin: 0;
+      }
+    }
+    @include respond(900px) {
+      padding: 1.2rem 3rem;
+      flex: 1;
+      transform-origin: top;
+    }
+
+    // background: #000;
+    &-link:any-link {
+      color: $color-white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      @include respond(530px) {
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &-icon {
+      z-index: 1;
+      height: 2.5rem;
+      width: 2.5rem;
+      fill: currentColor;
+      margin-right: 1.5rem;
+      @include respond(530px) {
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+    }
+    &-label {
+      z-index: 1;
+      font-size: 1.3rem;
+      font-weight: 600;
+      @include respond(320px) {
+        font-size: 1rem;
+      }
+    }
+  }
+  &__item::before {
+    content: "";
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(to right, $color-primary, $color-primary, $color-bg-dark);
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: scale(0);
+    transition: transform 0.2s, width 0.3s cubic-bezier(1, 0, 0, 1) 0.2s;
+    @include respond(900px) {
+      background: $color-primary;
+    }
+  }
+  &__item:hover::before,
+  &__item-selected::before {
+    transform: scale(1);
+    width: 100%;
+  }
+}
+
+.gallery {
+  display: flex;
+  &__item {
+    flex: 1;
+  }
+  &__img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    transition: all 0.2s;
+    &:hover,
+    &:focus {
+      z-index: 2;
+      border-radius: 10px;
+      transform: scale(1.3);
+      @include respond(900px) {
+        transform: scale(1);
+        border-radius: 0;
+      }
+    }
+    &:active {
+      border-radius: 0;
+      transform: scale(100%);
+    }
+  }
+}
+
+.overview {
+  display: flex;
+  align-items: center;
+  //   padding: 2rem 3rem;
+  border-bottom: $border-bottom;
+  @include respond(465px) {
+    flex-flow: column nowrap;
+  }
+  &__name {
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: $color-grey;
+    padding: 2rem 3rem;
+    @include respond(530px) {
+      font-size: 2rem;
+    }
+    @include respond(465px) {
+      font-size: 2.5rem;
+      padding-bottom: 0;
+    }
+  }
+  &__stars {
+    display: flex;
+    flex: 1;
+    padding: 0 2rem;
+    &-icon {
+      height: 2.5rem;
+      width: 2.5rem;
+      fill: $color-primary;
+      @include respond(530px) {
+        height: 1.8rem;
+        width: 1.8rem;
+      }
+    }
+    @include respond(465px) {
+      padding: 1rem;
+    }
+  }
+  &__loc {
+    display: flex;
+    align-items: center;
+    padding: 0 2em;
+    color: $color-primary-dark;
+    &-btn {
+      border: 0;
+      border-bottom: 2px solid $color-primary-dark;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: inherit;
+      cursor: pointer;
+      @include respond(530px) {
+        font-size: 1.5rem;
+      }
+      // @include respond(465px) {
+      //   font-size: 1.2rem;
+      // }
+    }
+    &-icon {
+      height: 3rem;
+      width: 2.5rem;
+      fill: currentColor;
+      // @include respond(465px) {
+      //   height: 2.5rem;
+      //   width: 2rem;
+      // }
+    }
+  }
+  &__rate {
+    background-color: $color-primary;
+    align-self: stretch;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    color: $color-white;
+    @include respond(465px) {
+      padding: 1rem;
+    }
+    &-num {
+      font-size: 3rem;
+      @include respond(530px) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
+
+  &__book {
+    text-transform: uppercase;
+    font-size: 2rem;
+    color: $color-text;
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+  }
+
+  &__btn {
+    font-size: 1.5rem;
+    border: 0;
+    background: linear-gradient(to right, $color-primary, $color-primary-dark);
+    border-radius: 10rem;
+    color: $color-white;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+
+    &-initial {
+      display: inline-block;
+      padding: 2rem 7.5rem;
+      transition: transform 0.2s, opacity 0.5s;
+    }
+    &-then {
+      display: inline-block;
+      position: absolute;
+      top: -2rem;
+      left: 4rem;
+      opacity: 0;
+      transition: transform 0.2s, opacity 0.5s;
+    }
+    &:hover &-initial {
+      transform: translateY(4rem);
+      opacity: 0;
+    }
+    &:hover &-then {
+      transform: translateY(4rem);
+      opacity: 1;
+    }
+  }
+}
